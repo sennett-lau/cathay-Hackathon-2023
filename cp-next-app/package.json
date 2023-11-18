@@ -9,7 +9,6 @@
     "lint": "eslint --ext .ts src",
     "lint:fix": "eslint --ext .ts src --fix",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json}\"",
-    "prepare": "husky install",
     "tsc:noEmit": "tsc --noEmit"
   },
   "dependencies": {
@@ -37,7 +36,6 @@
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^8.0.3",
     "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",
     "sass": "^1.62.1",

@@ -65,10 +65,10 @@ const SignInPage = () => {
             <Flex
               w={'100%'}
               h={'60px'}
-              bg={'#2c4036'}
+              bg={loginId && password ? '#2c4036' : '#BFBFBF'}
               justifyContent={'center'}
               onClick={signIn}
-              cursor={'pointer'}
+              cursor={loginId && password ? 'pointer' : 'not-allowed'}
               alignItems={'center'}
             >
               <Text color={'#fff'} fontSize={'16px'} fontWeight={'semibold'}>
