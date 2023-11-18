@@ -12,25 +12,36 @@ const SignInPage = () => {
   const dispatch = useDispatch()
   const router = useRouter()
 
-  const signIn = () => {
-    console.log(loginId, password)
-    // TODO: call api
+  const signIn = async () => {
+    if (!loginId || !password) return
+    try {
+      // const resp = await userApi.post('/sign-in', {
+      //   username: loginId,
+      //   password,
+      // })
 
-    // add memberId to store
-    dispatch(
-      setMemberId({
-        memberId: loginId,
-      }),
-    )
+      // if (resp.status === 200) {
+      // add memberId to store
 
-    // redirect to home page
-    router.push('/')
+      dispatch(
+        setMemberId({
+          memberId: loginId,
+        }),
+      )
 
-    dispatch(
-      setRecommendationModalOpen({
-        isRecommendationModalOpen: true,
-      }),
-    )
+      // redirect to home page
+      router.push('/')
+
+      dispatch(
+        setRecommendationModalOpen({
+          isRecommendationModalOpen: true,
+        }),
+      )
+      // }
+    } catch (error) {
+      console.log(error)
+      return
+    }
   }
 
   return (
