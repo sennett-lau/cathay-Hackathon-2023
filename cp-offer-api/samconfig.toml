@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "cp-offer-api"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-42w6fe29eio3"
+s3_prefix = "cp-offer-api"
+region = "us-west-2"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Project=\"cp\" Env=\"dev\" Module=\"offer-api\""
+image_repositories = []

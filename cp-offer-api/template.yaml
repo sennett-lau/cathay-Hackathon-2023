@@ -1,0 +1,94 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: ''
+Parameters:
+  Project:
+    Type: String
+    Description: Project Name
+    Default: cp
+  Env:
+    Type: String
+    Default: dev
+  Module:
+    Type: String
+    Default: offer-api
+
+Globals:
+  Function:
+    Runtime: nodejs14.x
+    CodeUri: dist/
+    Timeout: 30
+    MemorySize: 128
+    Architectures:
+      - x86_64
+    Environment:
+      Variables:
+        ENV: !Ref Env
+        OFFER_TABLE: !Ref OfferTable
+Resources:
+  OfferAPI:
+    Type: AWS::Serverless::Api
+    Properties:
+      Name: !Sub ${Project}-${Env}-${Module}-api
+      StageName: !Ref Env
+      Cors:
+        AllowMethods:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+          - OPTIONS
+        AllowHeaders:
+          - Content-Type
+          - X-Forwarded-For
+          - x-api-key
+          - x-user-id
+        AllowOrigin:
+          - "'*'"
+        MaxAge: 600
+        AllowCredentials: false
+
+  GetOffersFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: !Sub ${Project}-${Env}-${Module}-getOffersFunction
+      Handler: handlers/offer-get.getOffersHandler
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref OfferTable
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /offers/{memberId}
+            Method: GET
+            RestApiId:
+              Ref: OfferAPI
+
+  OfferTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Sub ${Project}-${Env}-${Module}-offer-table
+      KeySchema:
+        - AttributeName: offerId
+          KeyType: HASH
+      AttributeDefinitions:
+        - AttributeName: memberId
+          AttributeType: S
+      GlobalSecondaryIndexes:
+        - IndexName: memberId-index
+          KeySchema:
+            - AttributeName: memberId
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+      BillingMode: PAY_PER_REQUEST
+
+Outputs:
+  OfferApiUrl:
+    Description: Offer API API Gateway endpoint URL
+    Value:
+      Fn::Sub: https://${OfferAPI}.execute-api.${AWS::Region}.amazonaws.com/${Env}/
+    Export:
+      Name:
+        Fn::Sub: ${Project}-${Env}-offer-api-url

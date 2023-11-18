@@ -1,0 +1,15 @@
+# IDE
+.idea
+.vscode
+
+# AWS SAM
+.aws-sam/*
+*/**/.aws-sam
+
+# Node.js
+node_modules
+dist
+
+# Env
+.env
+*/**/.env

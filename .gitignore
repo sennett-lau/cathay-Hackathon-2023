@@ -347,3 +347,4 @@ fabric.properties
 */**/.aws-sam
 */**/.sst
 */**/.open-next
+*/**/dist
