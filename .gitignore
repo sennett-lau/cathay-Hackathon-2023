@@ -345,3 +345,5 @@ fabric.properties
 */**/.idea
 */**/.vscode
 */**/.aws-sam
+*/**/.sst
+*/**/.open-next
