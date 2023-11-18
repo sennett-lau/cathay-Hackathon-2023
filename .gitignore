@@ -339,3 +339,9 @@ fabric.properties
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,phpstorm,macos,nextjs,node
+
+*/**/.next
+*/**/node_modules
+*/**/.idea
+*/**/.vscode
+*/**/.aws-sam

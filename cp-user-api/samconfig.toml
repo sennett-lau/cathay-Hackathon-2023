@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "cp-dev-user-api"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-42w6fe29eio3"
+s3_prefix = "cp-dev-user-api"
+region = "us-west-2"
+capabilities = "CAPABILITY_IAM"
+parameter_overrides = "Module=\"user-api\" Project=\"cp\" Env=\"dev\""
+image_repositories = []
