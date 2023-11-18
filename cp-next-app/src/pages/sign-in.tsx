@@ -1,5 +1,6 @@
+import { offerApi } from '@/api/axios'
 import { setRecommendationModalOpen } from '@/store/controlSlice'
-import { setMemberId } from '@/store/memberSlice'
+import { setMemberId, setOfferItems } from '@/store/memberSlice'
 import { Container, Flex, Image, Input, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
@@ -23,11 +24,23 @@ const SignInPage = () => {
       // if (resp.status === 200) {
       // add memberId to store
 
+      // const resp = await offerApi.get(`/recommendation/${loginId}?n=3`)
+
+      // if (resp.status !== 200) {
+      //   return
+      // }
+
       dispatch(
         setMemberId({
           memberId: loginId,
         }),
       )
+
+      // dispatch(
+      //   setOfferItems({
+      //     offerItems: resp.data,
+      //   }),
+      // )
 
       // redirect to home page
       router.push('/')
